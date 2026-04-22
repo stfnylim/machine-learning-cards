@@ -117,6 +117,7 @@ body::after {
   gap: 6px;
   padding: 14px 0 4px;
   border-bottom: 1px solid var(--border);
+  /* on mobile this becomes a horizontal scroll strip */
 }
 
 .cat-btn {
@@ -307,6 +308,14 @@ body::after {
   font-size: 9px;
   color: var(--text-dim);
 }
+/* on touch devices, replace keyboard hint with "tap" */
+@media (hover: none) and (pointer: coarse) {
+  .face-hint .kbd-hint { display: none; }
+  .face-hint .touch-hint { display: inline; }
+}
+@media (hover: hover) {
+  .face-hint .touch-hint { display: none; }
+}
 
 /* ─── Card actions (back face) ──────────────────────────────────────────────── */
 .card-actions {
@@ -437,8 +446,28 @@ body::after {
   .face-content { font-size: 15px; }
 
   .card-face { padding: 24px 22px 22px; }
+  .card-face, .card { min-height: 280px; }
 
   .main { gap: 18px; padding: 20px 0 16px; }
 
   .nav-btn { min-width: 90px; padding: 9px 14px; }
+
+  /* category nav: single horizontal scroll row on mobile */
+  .cat-nav {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 10px;
+    gap: 6px;
+  }
+  .cat-nav::-webkit-scrollbar { display: none; }
+  .cat-btn { flex-shrink: 0; padding: 5px 12px; font-size: 10px; }
+
+  /* hide keyboard shortcut bar — useless on touch */
+  .footer { display: none; }
+
+  /* bigger touch targets for mark buttons */
+  .mark-btn { padding: 14px 8px; font-size: 12px; }
+  .nav-btn  { padding: 12px 14px; }
 }

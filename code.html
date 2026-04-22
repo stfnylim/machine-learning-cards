@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content">
+  <meta name="theme-color" content="#0d0d0d">
+  <title>FlashTerm — Code Lab</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="code.css">
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+
+  <div class="scanlines" aria-hidden="true"></div>
+
+  <div class="app code-page">
+
+    <header class="header">
+      <div class="logo">FLASH<span class="logo-accent">TERM</span><span class="logo-sub"> / CODE LAB</span></div>
+      <a href="index.html" class="ctrl-btn back-btn">&#8592; FLASHCARDS</a>
+    </header>
+
+    <!-- Loading overlay -->
+    <div id="loadingOverlay" class="loading-overlay">
+      <div class="loading-inner">
+        <div class="loading-title">CODE<span class="logo-accent">LAB</span></div>
+        <div id="loadingStatus" class="loading-status">&gt; initializing python runtime...</div>
+        <div class="loading-bar"><div id="loadingFill" class="loading-bar-fill"></div></div>
+        <div class="loading-note">Pyodide (Python/WASM) loads once &amp; caches. On mobile, scroll down to see output after running.</div>
+      </div>
+    </div>
+
+    <!-- Main app (hidden until loaded) -->
+    <div id="codeApp" class="code-app" style="display:none">
+
+      <!-- Sidebar -->
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-top">
+          <div class="sidebar-meta">
+            SOLVED <span id="solvedCount" class="solved-count">0 / 0</span>
+          </div>
+          <div class="filter-row" id="filterRow">
+            <button class="filter-btn active" data-filter="all">ALL</button>
+          </div>
+        </div>
+        <div class="ch-list" id="challengeList"></div>
+      </aside>
+
+      <!-- Workspace -->
+      <div class="workspace">
+
+        <!-- Problem description -->
+        <div class="problem-pane" id="problemPane">
+          <div class="problem-header">
+            <h2 class="problem-title" id="problemTitle">← select a challenge</h2>
+            <div class="problem-meta" id="problemMeta"></div>
+          </div>
+          <pre class="problem-desc" id="problemDesc"></pre>
+        </div>
+
+        <!-- Editor -->
+        <div class="editor-pane">
+          <div class="editor-toolbar">
+            <span class="pane-label">EDITOR</span>
+            <div class="editor-btns">
+              <button id="runBtn" class="run-btn" disabled>&#9654; RUN</button>
+              <button id="resetBtn" class="tool-btn">&#8635; RESET</button>
+              <button id="hintBtn" class="tool-btn">? HINT</button>
+            </div>
+          </div>
+          <textarea
+            id="codeEditor"
+            class="code-editor"
+            spellcheck="false"
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="off"
+            placeholder="Select a challenge to begin..."
+          ></textarea>
+          <div id="hintBox" class="hint-box" style="display:none"></div>
+        </div>
+
+        <!-- Output -->
+        <div class="output-pane">
+          <div class="output-section">
+            <div class="pane-label">STDOUT</div>
+            <pre id="stdoutBox" class="stdout-box">(no output yet)</pre>
+          </div>
+          <div class="output-section">
+            <div class="pane-label">TESTS</div>
+            <div id="testResultsBox" class="test-results-box"></div>
+            <div id="successBanner" class="success-banner" style="display:none">
+              &#x2713; ALL TESTS PASS
+            </div>
+          </div>
+        </div>
+
+      </div><!-- end workspace -->
+    </div><!-- end codeApp -->
+
+  </div><!-- end app -->
+
+  <!-- Mobile sidebar toggle -->
+  <button class="mobile-sidebar-btn" id="mobileSidebarBtn" aria-label="Toggle challenge list">&#9776;</button>
+
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.26.2/full/pyodide.js"></script>
+  <script src="cards.js"></script>
+  <script src="challenges.js"></script>
+  <script src="code.js"></script>
+</body>
+</html>

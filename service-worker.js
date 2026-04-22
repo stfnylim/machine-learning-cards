@@ -1,5 +1,5 @@
 // service-worker.js
-const CACHE = 'flashterm-v1';
+const CACHE = 'flashterm-v2';
 
 const ASSETS = [
   './',
@@ -7,7 +7,11 @@ const ASSETS = [
   './style.css',
   './app.js',
   './cards.js',
-  './manifest.json'
+  './manifest.json',
+  './code.html',
+  './code.css',
+  './code.js',
+  './challenges.js'
 ];
 
 // Install: pre-cache all app assets
